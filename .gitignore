@@ -1,6 +1,9 @@
 # Node.js dependencies
 node_modules/
 
+/02_npm/node_modules
+
+
 # Logs
 logs
 *.log
