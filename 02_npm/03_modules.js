@@ -1,4 +1,3 @@
-const { log, clear } = require('console');
 var fs  = require('fs');
 var os  = require('os');
 
