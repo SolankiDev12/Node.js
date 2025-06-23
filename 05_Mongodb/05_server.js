@@ -10,36 +10,42 @@ const bodyparser = require('body-parser')
 app.use(bodyparser.json());
 
 
-app.post('/menu', async(req,res) => {
-    try {
-    const data = req.body;
+// app.post('/menu', async(req,res) => {
+//     try 
+//     {
+//         const data = req.body;
     
-    const newMenu = new menu(data)
+//         const newMenu = new menu(data)
 
-    const response = await newMenu.save();
-    console.log('Menu recieved')
-    res.status(200).json(response)
-    }
-    catch(err)
-    {
-        console.log(err)
-        res.status(500).json({err : 'Internal server error'})
-    }
+//         const response = await newMenu.save();
+//         console.log('Menu recieved')
+//         res.status(200).json(response)
+//     }
+//     catch(err)
+//     {
+//         console.log(err)
+//         res.status(500).json({err : 'Internal server error'})
+//     }
 
-})
+// })
 
-app.get('/menu', async(req,res) => {
-    try{
-        const data = await menu.find();
+// app.get('/menu', async(req,res) => {
+//     try{
+//         const data = await menu.find();
 
-        console.log('Data fetched')
-        res.status(200).json(data);
-    }catch(err)
-    {
-        console.log(err)
-        res.status(500).json({err : 'Internal server error'})
-    }
-})
+//         console.log('Data fetched')
+//         res.status(200).json(data);
+//     }catch(err)
+//     {
+//         console.log(err)
+//         res.status(500).json({err : 'Internal server error'})
+//     }
+// })
+
+
+const menuRoutes = require('./routes/menuroutes')
+
+app.use('/menu',menuRoutes)
 
 
 app.listen(3000, ()=>{
