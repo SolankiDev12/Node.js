@@ -3,6 +3,7 @@ node_modules/
 
 /02_npm/node_modules
 
+/07_Hosting/node_modules
 
 # Logs
 logs
@@ -13,3 +14,5 @@ logs
 
 # VS Code
 .vscode/
+
+.env

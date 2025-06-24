@@ -66,6 +66,19 @@ app.get('/movie/:var' , async(req,res) => {
         res.status(500).json({err : 'Internal server error'})
     }
 })
+app.get('/movie' , async(req,res) => {
+    try
+    {
+        const data = await Movie.find();
+        console.log('Data fetched')
+        res.status(200).json(data);
+    }
+    catch(err)
+    {
+        console.log(err)
+        res.status(500).json({err : 'Internal server error'})
+    }
+})
 
 app.post('/movie' , async(req,res) => {
     try{
