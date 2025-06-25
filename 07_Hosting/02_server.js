@@ -9,7 +9,7 @@ app.use(bodyparser.json());
 const {menu} = require('./04_menuSchema')
 
 require('dotenv').config()
-
+//https://nodejs-zfe6.onrender.com/
 app.get('/', (req,res) => {
     console.log("Connected with MongoDb Atlas online and local node env")
 })
