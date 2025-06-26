@@ -14,7 +14,7 @@ const logReq = (req, res ,next) => {
 }
 
 app.use(logReq) //use in all routes
-
+// npm install passport passport-local
 app.get('/', logReq ,(req,res) => {
     console.log("Middleware + Auth") //if we dont use next() then this all will not be executed
     res.send(`<h1> Middleware + Auth </h1>`)
@@ -25,6 +25,19 @@ app.get('/', logReq ,(req,res) => {
 // req => middleware => res 
 //e.g -> bodyparser , router
 //
+
+
+const AuthSchema = require('./04_userSchema')
+const passport = require('./05_Auth')
+
+app.use(passport.initialize());
+
+app.get('/auth', passport.authenticate('local', { session: false }), (req, res) => {
+    console.log(`auth route accessed`);
+    res.send('Authenticated successfully!');
+});
+
+
 
 const port = 3000 ;
 
