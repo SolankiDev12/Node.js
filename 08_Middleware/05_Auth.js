@@ -1,6 +1,9 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy ; 
-const AuthSchema = require('./04_userSchema')
+const AuthSchema = require('./04_userSchema');
+const { compare } = require('bcrypt');
+
+
 
 passport.use(new LocalStrategy(async (usrname, pwd, done) => {
   try {
@@ -8,14 +11,16 @@ passport.use(new LocalStrategy(async (usrname, pwd, done) => {
     
     console.log('Username:', usrname);
     console.log('User from DB:', user);
-    console.log('Password Match:', user?.password === pwd);
+    // console.log('Password Match:', user?.password === pwd);
 
 
     if (!user) {
       return done(null, false, { message: 'Incorrect username.' });
     }
 
-    const passwordMatch = user.password === pwd;
+    // const passwordMatch = user.password === pwd;
+    const passwordMatch = await user.comparepwd(pwd) //fnc defined in schema
+
     if (passwordMatch) {
       return done(null, user);
     } else {

@@ -32,11 +32,31 @@ const passport = require('./05_Auth')
 
 app.use(passport.initialize());
 
-app.get('/auth', passport.authenticate('local', { session: false }), (req, res) => {
+app.post('/auth', passport.authenticate('local', { session: false }), (req, res) => {
     console.log(`auth route accessed`);
     res.send('Authenticated successfully!');
 });
 
+app.post('/authh', async(req,res) =>{
+    try{
+        const data = req.body;
+
+    const newuser = new AuthSchema(data);
+    const response =await newuser.save();
+
+    if(!response)
+    {
+            console.log("Not saved");
+            res.status(500).json(response)
+    }
+        console.log('Data saved')
+        res.status(200).json(response)
+    }catch(err)
+    {
+        console.log(err)
+        res.status(500).json({err : 'Internal server error'})
+    }
+} )
 
 
 const port = 3000 ;
