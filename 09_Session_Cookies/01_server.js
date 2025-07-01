@@ -39,23 +39,7 @@ app.post('/signup' , async(req, res) =>{
 })
 
 app.get('/signin' , async(req, res) =>{
-    try{
-        const data = req.body;
-
-        const newdata = new AuthSchema(data)
-        const response = await newdata.save();
-        console.log('Data saved') 
-
-        //Data is saved now will generate one token for that user with payload it can be anyhting in curr it is username
-        const token = generateToken(response.username);
-
-        res.status(200).json({response : response , token : token});
-
-    }catch(err)
-    {
-        console.log(err)
-        res.status(500).json({err : 'Internal Server Error'})
-    }
+   //yet to impelement
 })
 
 const port = 3000 ;
