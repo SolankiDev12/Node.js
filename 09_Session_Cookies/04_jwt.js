@@ -33,7 +33,8 @@ const jwtMiddlewareToken = (req, res , next) =>
 //Function to generate the token
 const generateToken = (userData) => { //it needs payload which we get from userdata
     return jwt.sign(userData, process.env.JWT_SECRET_KEY); //assigns jwt token and for that we give userdata + secret key
-}   //instead of userdata as a string we can pass any object like {username : 'xyz', id : '123'} which we will better
+}   
+//instead of userdata as a string we can pass any object like {username : 'xyz', id : '123'} which we will better
 
 
 
