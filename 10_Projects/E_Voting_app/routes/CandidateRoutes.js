@@ -12,7 +12,7 @@ const { jwtMiddlewareToken , generateToken } = require('../jwt')
 const checkAdminRole = async(UserId) => 
     {
         try{
-            const user = await CandidateSchema.findById(UserId);
+            const user = await userSchema.findById(UserId);
             return user.role === 'admin'
         }catch(err)
         {
