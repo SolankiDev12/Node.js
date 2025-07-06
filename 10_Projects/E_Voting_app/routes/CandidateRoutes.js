@@ -138,4 +138,61 @@ router.post('/vote/:candidateID', jwtMiddlewareToken, async(req, res) => {
 })
 
 
+router.get('/vote/count', async(req, res) => {
+    try{
+        const candidateVoteCounts = await CandidateSchema.find().sort({ voteCount : 'desc'})
+
+        const record = candidateVoteCounts.map( (data) => {
+            return {
+                party : data.party,
+                count : data.voteCount
+            }
+        });
+
+        return res.status(200).json({message: 'Vote counts retrieved successfully', record: record});
+
+    }catch(err)
+    {
+         console.log(err);
+         res.status(500).json({error: 'Internal Server Error'});    
+    }
+})
+
+router.get('/', jwtMiddlewareToken, async(req, res) => {
+    try{
+
+        const candidates = await CandidateSchema.find();
+        if(candidates.length === 0)
+        {
+            return res.status(404).json({error: 'No candidates found'});
+        }
+
+        const response = candidates.map((i) => {
+            return {
+                party: i.party,
+                candidateName: i.name,
+                age: i.age,
+                votes: i.voteCount,
+                candidateID: i._id,
+            }
+        })
+
+        if(!response || response.length === 0)
+        {
+            return res.status(404).json({error: 'No candidates found'});
+        }
+
+        console.log('Candidates retrieved successfully');
+        res.status(200).json({message: 'Candidates retrieved successfully', candidates: response});
+
+
+    }catch(err)
+    {
+        console.log(err);
+        res.status(500).json({error: 'Internal Server Error'});    
+    }
+})
+
+
+
 module.exports = router;
