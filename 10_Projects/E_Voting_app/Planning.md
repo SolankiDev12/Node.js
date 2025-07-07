@@ -44,3 +44,6 @@ A functionality where a user can vote for a given set of candidates.
 
 ## Future Work
 - Will Intergrate a ChatBot Specific to the Election
+
+
+//Working on frontend link will be added soon of updated project
